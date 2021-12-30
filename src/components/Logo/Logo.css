@@ -1,0 +1,19 @@
+.logo {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  height: 100px;
+  width: 100px;
+  border: 1px solid red;
+  margin: 0;
+  padding: 0;
+}
+
+.logo-text-one {
+  color: #c6e3e8;
+  transform: matrix(0.99, -0.12, 0.12, 0.99, 0, 0);
+}
+
+.logo-text-two {
+  color: #c6e3e8;
+}

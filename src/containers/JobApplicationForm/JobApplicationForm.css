@@ -1,0 +1,139 @@
+.container {
+  min-height: 90vh;
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border: 0.5px solid #0f4a7b;
+  margin: 60px 0;
+  padding: 0 50px;
+  background: #f9fbfd;
+}
+
+.close {
+  height: 5vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin: 0;
+  padding: 0;
+}
+
+.close-ico {
+  color: #3e3e40;
+  margin: 0 -20px 0 0;
+  padding: 0;
+}
+
+.close-ico:hover {
+  cursor: pointer;
+  color: #0f4a7b;
+}
+
+.title {
+  height: 3.5vh;
+  width: 100%;
+  margin: 0 0 6px 0;
+}
+
+.title-txt {
+  font-size: 20px;
+  color: #0f4a7b;
+  margin: 0;
+  padding: 0;
+}
+
+.sub-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px;
+  margin: 0 0 8px 0;
+  padding: 0;
+}
+
+.sub-title-img {
+  margin: 0 8px 0 0;
+}
+
+.attr {
+  display: none;
+}
+
+.sub-title-txt {
+  color: #3e3e40;
+}
+
+.form-container {
+  min-height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-upload {
+  height: 30vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px solid #0f4a7b;
+  border-radius: 6px;
+  box-sizing: border-box;
+  background: #fff;
+  margin: 16px 0;
+  padding: 12px 20px;
+}
+
+.form-upload-ico {
+  margin: 5px 0;
+  padding: 0;
+}
+
+.form-upload-txt {
+  color: #0f4a7b;
+  font-weight: 600;
+  margin: 5px 0;
+  padding: 0;
+}
+
+.form-upload-btn {
+  margin: 5px 0;
+  padding: 9px 20px;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  background: #0f4a7b;
+}
+
+.form-submit {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 75px 0;
+}
+
+.form-submit-btn {
+  height: 60%;
+  width: 100%;
+  border: none;
+  color: white;
+  background: #0f4a7b;
+}
+
+.form-upload-btn:hover,
+.form-submit-btn:hover {
+  cursor: pointer;
+  background: rgba(15, 74, 123, 0.9);
+}
