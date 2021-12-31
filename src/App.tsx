@@ -1,16 +1,15 @@
 import React from "react";
-import "./App.css";
 
-import JobApplicationForm from "./containers/JobApplicationForm/JobApplicationForm";
-import JobCreationForm from "./containers/JobCreationForm/JobCreationForm";
-import LandingPageAdmin from "./containers/LandingPageAdmin/LandingPageAdmin";
-import LandingPageGuest from "./containers/LandingPageGuest/LandingPageGuest";
-import LoginPage from "./containers/LoginPage/LoginPage";
+import JobApplicationForm from "./containers/JobApplicationForm";
+import JobCreationForm from "./containers/JobCreationForm";
+import LandingPageAdmin from "./containers/LandingPageAdmin";
+import LandingPageGuest from "./containers/LandingPageGuest";
+import LoginPage from "./containers/LoginPage";
 
 function App() {
   return (
-    <div className="App">
-      <LandingPageAdmin />
+    <div className="flex flex-row justify-center items-center">
+      <LoginPage />
     </div>
   );
 }
