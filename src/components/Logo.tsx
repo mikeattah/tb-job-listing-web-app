@@ -1,6 +1,10 @@
+import React from "react";
+
 function Logo({ ...props }) {
   return (
-    <div className={`${props.position} top-2 left-[75px] text-color-four`}>
+    <div
+      className={`${props.position} top-2 left-[25px] md:left-[50px] lg:left-[75px] text-color-four`}
+    >
       <p className="rotate-[-5deg] font-pri text-[36px] text-color-four m-0 p-0">
         FindJobs
       </p>

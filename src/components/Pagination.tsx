@@ -4,7 +4,7 @@ function Pagination({ ...props }) {
   const [pageIndex, setPageIndex] = useState(0);
 
   const pageElements: number = 4;
-  let pageCount: number = 5; // change back to zero
+  let pageCount: number = 5; // change back to zero?
   let pageArray: number[] = [];
 
   if (props.data) pageCount = Math.ceil(props.data.length / pageElements);
@@ -15,10 +15,10 @@ function Pagination({ ...props }) {
   if (props.data) console.log(props.data.length, pageArray.length); // <= 11, 3
 
   return (
-    <div className="h-[150px] w-[45%] flex flex-row justify-start items-start m-0 pt-[40px] pb-0 px-0">
+    <div className="h-[150px] w-full md:w-[45%] flex flex-row justify-center md:justify-start items-start m-0 pt-[40px] pb-0 px-0">
       <button
         onClick={() => setPageIndex(pageIndex - pageElements)}
-        className="text-color-three hover:text-white hover:bg-color-three font-semibold border-[0.2px] border-color-three rounded-md my-0 mr-[10px] ml-0 py-[5px] px-[15px] hover:cursor-pointer"
+        className="text-color-three hover:text-white hover:bg-color-three font-semibold border-[0.2px] border-color-three rounded-md my-0 mr-[6px] md:mr-[8px] lg:mr-[10px] ml-0 py-[3px] md:py-[4px] lg:py-[5px] px-[9px] md:px-[12px] px-[15px] hover:cursor-pointer"
         disabled={pageIndex === pageArray[0] ? "true" : ""}
       >
         &#60;
@@ -27,7 +27,7 @@ function Pagination({ ...props }) {
         return (
           <button
             onClick={() => setPageIndex(pageElements * index)}
-            className={`text-color-three hover:text-white hover:bg-color-three font-semibold border-[0.2px] border-color-three rounded-md my-0 mr-[10px] ml-0 py-[5px] px-[15px] hover:cursor-pointer ${
+            className={`text-color-three hover:text-white hover:bg-color-three font-semibold border-[0.2px] border-color-three rounded-md my-0 mr-[6px] md:mr-[8px] lg:mr-[10px] ml-0 py-[3px] md:py-[4px] lg:py-[5px] px-[9px] md:px-[12px] px-[15px] hover:cursor-pointer ${
               pageIndex === pageElements * index ? "" : ""
             }`}
           >
@@ -37,7 +37,7 @@ function Pagination({ ...props }) {
       })}
       <button
         onClick={() => setPageIndex(pageIndex + pageElements)}
-        className="text-color-three hover:text-white hover:bg-color-three font-semibold border-[0.2px] border-color-three rounded-md my-0 mr-[10px] ml-0 py-[5px] px-[15px] hover:cursor-pointer"
+        className="text-color-three hover:text-white hover:bg-color-three font-semibold border-[0.2px] border-color-three rounded-md my-0 mr-[6px] md:mr-[8px] lg:mr-[10px] ml-0 py-[3px] md:py-[4px] lg:py-[5px] px-[9px] md:px-[12px] px-[15px] hover:cursor-pointer"
         disabled={
           pageIndex === pageArray[pageArray.length - 1] * pageElements
             ? "true"

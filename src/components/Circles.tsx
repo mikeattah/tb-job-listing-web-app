@@ -1,3 +1,5 @@
+import React from "react";
+
 function Circles() {
   return (
     <div className="absolute top-[100px] right-0 h-[200px] w-[215px] pt-[28px] overflow-clip z-0">

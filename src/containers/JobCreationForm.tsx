@@ -2,8 +2,8 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
+import FormInputOne from "components/FormInputOne";
 import FormInputTwo from "components/FormInputTwo";
-import FormInputThree from "components/FormInputThree";
 
 function JobCreationForm() {
   const jobTypes: string[] = [
@@ -41,21 +41,21 @@ function JobCreationForm() {
         </p>
       </div>
       <form className="min-h-[750px] w-full flex flex-col justify-between items-center">
-        <FormInputTwo title="Job Title" type="text" name="job-title" />
-        <FormInputTwo title="Company Name" type="text" name="company-name" />
-        <FormInputTwo title="Location" type="text" name="location" />
-        <FormInputThree
+        <FormInputOne title="Job Title" type="text" name="job-title" />
+        <FormInputOne title="Company Name" type="text" name="company-name" />
+        <FormInputOne title="Location" type="text" name="location" />
+        <FormInputTwo
           title="What type of employment is it?"
           name="job-type"
           options={jobTypes}
         />
-        <FormInputTwo title="Salary Range" type="text" name="salary-range" />
-        <FormInputTwo
+        <FormInputOne title="Salary Range" type="text" name="salary-range" />
+        <FormInputOne
           title="Submission Deadline"
           type="date"
           name="submission-deadline"
         />
-        <FormInputThree
+        <FormInputTwo
           title="What type of Sector is this job categorized under?"
           name="job-sector"
           options={jobSectors}

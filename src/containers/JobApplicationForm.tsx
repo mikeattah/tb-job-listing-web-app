@@ -3,7 +3,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-import FormInputTwo from "components/FormInputTwo";
+import FormInputOne from "components/FormInputOne";
 
 function JobApplicationForm() {
   return (
@@ -21,8 +21,8 @@ function JobApplicationForm() {
       </div>
       <div className="h-[10px] w-full flex flex-row justify-start items-center mt-0 mb-[8px] mx-0 p-0">
         <img
-          src="../assets/images/location.png"
-          alt="location icon"
+          src="assets/images/location.png"
+          alt="."
           className="my-0 mr-[8px] ml-0 p-0"
         />
         <div className="hidden">
@@ -40,15 +40,15 @@ function JobApplicationForm() {
         <span className="text-color-seven">Ikeja Lagos</span>
       </div>
       <form className="min-h-[850px] w-full flex flex-col justify-between items-center">
-        <FormInputTwo title="First Name" type="text" name="first-name" />
-        <FormInputTwo title="Last Name" type="text" name="last-name" />
-        <FormInputTwo title="Email Address" type="email" name="email-address" />
-        <FormInputTwo title="Location" type="text" name="location" />
-        <FormInputTwo title="Phone Number" type="number" name="phone-number" />
+        <FormInputOne title="First Name" type="text" name="first-name" />
+        <FormInputOne title="Last Name" type="text" name="last-name" />
+        <FormInputOne title="Email Address" type="email" name="email-address" />
+        <FormInputOne title="Location" type="text" name="location" />
+        <FormInputOne title="Phone Number" type="number" name="phone-number" />
         <div className="h-[250px] w-full flex flex-col justify-center items-center border border-color-three rounded-lg box-border bg-white my-[40px] mx-0 py-[12px] px-[20px]">
           <img
-            src="../assets/images/cloud-computing.png"
-            alt="upload cloud icon"
+            src="assets/images/cloud-computing.png"
+            alt="."
             className="my-[5px] mx-0 p-0"
           />
           <div className="hidden">
@@ -66,7 +66,7 @@ function JobApplicationForm() {
               www.flaticon.com'
             </a>
           </div>
-          <p className="text-color-three font-semibold my-[5px] mx-0 p-0">
+          <p className="text-color-three font-semibold my-[5px] mx-0 p-0 text-center">
             Drag and drop your CV here
           </p>
           <p className="text-color-three font-semibold my-[5px] mx-0 p-0">or</p>
@@ -83,5 +83,8 @@ function JobApplicationForm() {
     </div>
   );
 }
+
+// location icon
+// upload cloud icon
 
 export default JobApplicationForm;
