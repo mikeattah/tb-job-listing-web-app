@@ -3,15 +3,28 @@ module.exports = {
   darkMode: "media", // or false, 'media' or 'class'
   theme: {
     extend: {
+      boxShadow: {
+        aaa: "0 4px 50px 0 rgba(15, 74, 123, 0.15)",
+        bbb: "0 4px 50px 0 rgba(194, 32, 51, 0.25)",
+        ccc: "0 4px 10px 0 rgba(62, 62, 64, 0.1)",
+      },
       colors: {
+        "color-white-3": "rgba(255, 255, 255, 0.3)",
+        "color-white-6": "rgba(255, 255, 255, 0.6)",
         "color-one": "#62becb",
         "color-two": "#dd4033",
         "color-three": "#0f4a7b",
         "color-three-9": "rgba(15, 74, 123, 0.9)",
+        "color-three-1-5": "rgba(15, 74, 123, 0.15)",
         "color-four": "#c6e3e8",
         "color-five": "#f57d7d",
         "color-six": "#f9fbfd",
         "color-seven": "#3e3e40",
+        "color-eight": "#FFEDED",
+        "color-nine": "#EA5566",
+        "color-ten": "rgba(62, 62, 64, 0.5)",
+        "color-eleven": "rgba(62, 62, 64, 1)",
+        "color-twelve": "rgba(98, 190, 203, 1)",
       },
       inset: {
         "by-screen": "0vh",
@@ -37,18 +50,18 @@ module.exports = {
         160: "1.6",
       },
       zIndex: {
-        "-10": "-10",
+        n10: "-10",
       },
       fontFamily: {
         pri: [
-          "Montez",
+          "Pushster",
           "Montserrat",
           "Roboto",
           "Sacramento",
           "WindSong",
           "Charmonman",
         ],
-        sec: ["Sacramento", "Charmonman"],
+        sec: ["Poppins", "Charmonman"],
         ter: ["Montserrat", "Charmonman"],
       },
       width: {
@@ -60,6 +73,7 @@ module.exports = {
         "6/7": "85.7142857%",
         "49/50": "98%",
         "1/10": "10%",
+        "9/10": "90%",
         "1/15": "6.666667%",
         "1/20": "5%",
         "1/25": "4%",
@@ -92,6 +106,7 @@ module.exports = {
         "5/7": "71.4285714%",
         "6/7": "85.7142857%",
         "1/10": "10%",
+        "9/10": "90%",
         "1/12": "8.333333%",
         "2/12": "16.666667%",
         "3/12": "25%",

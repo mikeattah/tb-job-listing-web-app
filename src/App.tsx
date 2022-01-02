@@ -9,7 +9,7 @@ import LoginPage from "./containers/LoginPage";
 function App() {
   return (
     <div className="flex flex-row justify-center items-center">
-      <LoginPage />
+      <LandingPageAdmin />
     </div>
   );
 }

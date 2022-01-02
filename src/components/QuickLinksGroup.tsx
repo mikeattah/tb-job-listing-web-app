@@ -1,19 +1,19 @@
 function QuickLinksGroup({ ...props }) {
   return (
-    <div className="quick-links-container">
-      <p className="quick-links-text">Quick Links</p>
-      <ul className="quick-links-group">
-        <li className="quick-links-item">
-          <a className="quick-links-link">Home</a>
+    <div className="h-full w-1/2">
+      <p className="text-white font-semibold">Quick Links</p>
+      <ul className="text-color-white-6 list-none">
+        <li className="my-2 mx-0 p-0 hover:text-white hover:cursor-pointer">
+          <a className="">Home</a>
         </li>
-        <li className="quick-links-item">
-          <a className="quick-links-link">About</a>
+        <li className="my-2 mx-0 p-0 hover:text-white hover:cursor-pointer">
+          <a className="">About</a>
         </li>
-        <li className="quick-links-item">
-          <a className="quick-links-link">Calendar</a>
+        <li className="my-2 mx-0 p-0 hover:text-white hover:cursor-pointer">
+          <a className="">Calendar</a>
         </li>
-        <li className="quick-links-item">
-          <a className="quick-links-link">Terms and condition</a>
+        <li className="my-2 mx-0 p-0 hover:text-white hover:cursor-pointer">
+          <a className="">Terms and condition</a>
         </li>
       </ul>
     </div>
