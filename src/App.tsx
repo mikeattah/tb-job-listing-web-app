@@ -7,9 +7,21 @@ import LandingPageGuest from "./containers/LandingPageGuest";
 import LoginPage from "./containers/LoginPage"; // images and strip design left
 
 function App() {
+  const isLoggedIn: Boolean = false;
+
+  const addNewJob = () => {
+    if (isLoggedIn) {
+      return <JobCreationForm />;
+    } else {
+      return <LoginPage />;
+    }
+  };
+
   return (
     <div className="flex flex-row justify-center items-center">
-      <LandingPageGuest />
+      {(isLoggedIn && <LandingPageAdmin addNewJob={addNewJob} />) || (
+        <LoginPage />
+      )}
     </div>
   );
 }

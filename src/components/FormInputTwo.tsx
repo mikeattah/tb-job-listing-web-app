@@ -1,6 +1,6 @@
 import React from "react";
 
-function FormInputThree({ ...props }) {
+function FormInputTwo({ ...props }) {
   return (
     <div className="h-10 w-full text-color-three text-[14px] font-semibold my-[25px]">
       <label htmlFor={props.name}>{props.title}</label> <br />
@@ -21,4 +21,4 @@ function FormInputThree({ ...props }) {
   );
 }
 
-export default FormInputThree;
+export default FormInputTwo;

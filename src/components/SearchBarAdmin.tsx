@@ -23,6 +23,7 @@ function SearchBarAdmin({ ...props }) {
           className="m-0 py-[3px] md:py-[8px] px-[20px] text-[16px] text-white hover:text-color-nine
           border-2 border-color-nine rounded-lg font-normal hover:cursor-pointer
           bg-color-nine hover:bg-white shadow-bbb"
+          onClick={() => props.addNewJob()}
         >
           + New Job
         </button>

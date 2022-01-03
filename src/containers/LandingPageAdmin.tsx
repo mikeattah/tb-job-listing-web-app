@@ -15,7 +15,7 @@ import TableTitle from "components/TableTitle";
 import TableContent from "components/TableContent";
 import Pagination from "components/Pagination";
 
-function LandingPageAdmin() {
+function LandingPageAdmin({ ...props }) {
   return (
     <div className="h-[1944px] lg:h-[1822px] w-screen flex flex-col justify-start items-center font-sec bg-color-six">
       <header className="h-[275px] w-full flex flex-col justify-between items-start bg-color-three m-0 py-0 px-[25px] md:px-[50px] lg:px-[75px]">
@@ -23,9 +23,13 @@ function LandingPageAdmin() {
         <div className="h-[75px] w-full flex flex-row justify-end items-center">
           <FontAwesomeIcon
             icon={faBell}
-            className="text-white text-[25px] my-0 mx-[10px] p-0"
+            className="text-white text-[25px] my-0 mx-[10px] p-0 hover:cursor-pointer"
           />
-          <img src="assets/images/tedbree.png" alt="." />
+          <img
+            src={require("../assets/images/tedbree.png")}
+            alt="Tedbree Logo"
+            className="hover:cursor-pointer"
+          />
         </div>
         <h1 className="m-0 pt-0 pb-[75px] px-0 text-white font-semibold font-ter text-[36px] italic">
           Jobs
@@ -34,7 +38,7 @@ function LandingPageAdmin() {
       </header>
       <section className="h-[1425px] w-full m-0 py-0 px-[25px] md:px-[50px] lg:px-[75px]">
         <div className="h-[150px] w-full flex flex-row justify-center items-end mt-0 mb-[25px] mx-0 p-0">
-          <SearchBarAdmin />
+          <SearchBarAdmin addNewJob={props.addNewJob()} />
         </div>
         <div className="h-[1100px] w-full flex flex-col justify-between items-center">
           <TableTitle />
@@ -83,7 +87,5 @@ function LandingPageAdmin() {
     </div>
   );
 }
-
-// Tedbree Logo
 
 export default LandingPageAdmin;

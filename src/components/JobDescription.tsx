@@ -8,8 +8,8 @@ function JobDescription({ ...props }) {
       </div>
       <div className="h-[25px] w-full flex flex-row justify-center md:justify-start items-center text-color-eleven">
         <img
-          src="assets/images/location.png"
-          alt="."
+          src={require("../assets/images/location.png")}
+          alt="location icon"
           className="my-0 mr-[8px] ml-0 p-0"
         />
         <span className="">Ikeja, Lagos</span>
@@ -23,7 +23,5 @@ function JobDescription({ ...props }) {
     </div>
   );
 }
-
-// location icon
 
 export default JobDescription;

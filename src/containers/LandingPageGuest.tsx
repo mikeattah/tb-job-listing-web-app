@@ -17,6 +17,8 @@ import Pagination from "components/Pagination";
 import NavBar from "components/NavBar";
 
 function LandingPageGuest() {
+  const isLoggedIn: Boolean = true;
+
   const url = "https://api.jobboard.tedbree.com/v1/my/jobs/1";
 
   const fetcher = (url: string) =>

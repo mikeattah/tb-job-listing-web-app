@@ -17,11 +17,10 @@ function TableTitle({ ...props }) {
       </div>
       <div className="h-full w-2/5 md:w-[45%] lg:w-1/2 flex flex-row justify-end items-center m-0 py-0 pr-[15px] pl-0 md:pr-[40px] md:pl-0 lg:pr-[75px] lg:pl-0">
         <span className="mr-[8px]">Filter</span>
-        <img src="assets/images/filter.png" alt="." />
+        <img src={require("../assets/images/filter.png")} alt="filter icon" />
       </div>
     </div>
   );
 }
 
-// filter icon
 export default TableTitle;
