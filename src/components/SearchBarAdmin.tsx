@@ -4,11 +4,16 @@ function SearchBarAdmin({ ...props }) {
   return (
     <div className="h-[125px] w-full m-0 p-0 flex flex-col md:flex-row justify-evenly md:justify-center items-center">
       <div className="h-2/5 w-full md:w-3/5 lg:w-2/5 flex flex-row justify-between items-center bg-white rounded-lg shadow-aaa m-0 py-0 px-2">
+        <img
+          src={require("../assets/images/search-interface-symbol.png")}
+          alt="location icon"
+          className="mx-2"
+        />
         <input
           type="text"
           id="job-title"
           placeholder="Front end developer"
-          className="h-full w-[70%] lg:w-4/5 m-0 py-0 px-1 outline-0 rounded-lg"
+          className="h-full w-[70%] lg:w-4/5 m-0 py-0 px-1 outline-0 rounded-lg text-color-eleven-8"
         />
         <input
           type="submit"

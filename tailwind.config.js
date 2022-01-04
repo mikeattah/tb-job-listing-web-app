@@ -24,6 +24,7 @@ module.exports = {
         "color-nine": "#EA5566",
         "color-ten": "rgba(62, 62, 64, 0.5)",
         "color-eleven": "rgba(62, 62, 64, 1)",
+        "color-eleven-8": "rgba(62, 62, 64, 0.8)",
         "color-twelve": "rgba(98, 190, 203, 1)",
       },
       inset: {

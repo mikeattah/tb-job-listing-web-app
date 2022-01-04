@@ -7,7 +7,7 @@ function FormInputTwo({ ...props }) {
       <select
         name={props.name}
         id={props.name}
-        className="w-full py-[12px] px-[20px] my-[8px] mx-0 border border-color-three rounded-lg outline-0 bg-white box-border inline-block"
+        className="w-full py-[12px] px-[20px] my-[8px] mx-0 border border-color-three rounded-lg outline-0 bg-white box-border inline-block text-color-eleven-8"
       >
         <option value="">Select option</option>
         {props.options.map((option: string, index: number) => (

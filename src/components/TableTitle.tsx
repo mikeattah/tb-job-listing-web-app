@@ -17,7 +17,24 @@ function TableTitle({ ...props }) {
       </div>
       <div className="h-full w-2/5 md:w-[45%] lg:w-1/2 flex flex-row justify-end items-center m-0 py-0 pr-[15px] pl-0 md:pr-[40px] md:pl-0 lg:pr-[75px] lg:pl-0">
         <span className="mr-[8px]">Filter</span>
-        <img src={require("../assets/images/filter.png")} alt="filter icon" />
+        <label
+          htmlFor={props.name}
+          className="border-2 border-color-three hover:cursor-pointer hover:border-2 hover:border-white rounded-lg py-1 mr-[8px]"
+        >
+          <img
+            src={require("../assets/images/filter.png")}
+            alt="filter icon"
+            className=""
+          />
+        </label>
+        <select name={props.name} id={props.name} className="">
+          {props.options.map((option: string, index: number) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+          ;
+        </select>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React from "react";
 
 function JobSummary({ ...props }) {
   return (
-    <div className="h-[300px] md:h-[425px] lg:h-[300px] w-[600px] md:w-full flex flex-col justify-start items-start group bg-white hover:bg-color-three rounded-xl shadow-lg my-0 mx-4 md:m-0 p-8">
+    <div className="h-[300px] md:h-[425px] lg:h-[300px] w-[450px] md:w-full flex flex-col justify-start items-start group bg-white hover:bg-color-three rounded-xl shadow-xl my-0 mx-4 md:m-0 p-8">
       <div className="h-[50px] md:h-[75px] lg:h-[50px] w-full flex flex-row md:flex-col lg:flex-row justify-between items-center md:items-start lg:items-center text-[20px] font-semibold text-color-three group-hover:text-white">
         <span className="">Front end developer</span>
         <span className="">$2K - $5K</span>

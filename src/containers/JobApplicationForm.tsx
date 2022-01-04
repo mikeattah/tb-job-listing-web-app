@@ -1,13 +1,100 @@
-import React from "react";
+import React, {
+  MouseEventHandler,
+  ChangeEvent,
+  useState,
+  memo,
+  useCallback,
+} from "react";
+import classNames from "classnames";
+import { gql, useMutation } from "@apollo/client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import FormInputOne from "components/FormInputOne";
+import { DropZone } from "components/DropZone";
+import UploadFiles from "components/UploadFiles";
 
-function JobApplicationForm() {
+const JobApplicationForm = memo(() => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [resume, setResume] = useState("");
+
+  // Active state for dropZone
+  const [isDropActive, setIsDropActive] = useState(false);
+  // create state for dropped files
+  const [files, setFiles] = useState<File[]>([]);
+
+  // State for uploaded files
+  const [fileUploaded, setFileUploaded] = useState("No file uploaded");
+  const [color, setColor] = useState("text-red-500");
+
+  // Handler for dropZone's "onDragStateChange" event
+  const onDragStateChange = useCallback((isDragActive: boolean) => {
+    setIsDropActive(isDragActive);
+  }, []);
+
+  // Handler for dropZone's "onFilesDrop" event
+  const onFilesDrop = useCallback((files: File[]) => {
+    setFiles(files);
+    setFileUploaded(`File uploaded: ${files[0].name} ✔️`);
+    setColor("text-color-one");
+  }, []);
+
+  // Handler for UPloadFile's "onButtonClick" event
+  const onButtonClick = useCallback(() => {
+    setFiles(files);
+    setFileUploaded(`File uploaded: ${files[0].name} ✔️`);
+    setColor("text-color-one");
+  }, []);
+
+  const APPLY_FOR_JOB = gql`
+    mutation applyForJob($jobId: String!) {
+      apply(jobId: $jobId) {
+        id
+        first_name
+        last_name
+        email_address
+        phone_number
+        location
+        resume
+      }
+    }
+  `;
+
+  const [applyForJob, { loading, error }] = useMutation(APPLY_FOR_JOB);
+
+  const handleSubmit = (
+    e: MouseEventHandler<HTMLInputElement, MouseEvent>
+  ): void => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    applyForJob({
+      variables: {
+        id: "",
+        first_name: firstName,
+        last_name: lastName,
+        email_address: email,
+        phone_number: phoneNumber,
+        location: location,
+        resume: resume,
+      },
+    });
+  };
+
   return (
-    <div className="h-[1000px] w-[550px] flex flex-col justify-center items-center border border-color-three my-[60px] mx-0 py-0 px-[50px] bg-color-six">
+    <div
+      className={`h-[1000px] w-[550px] flex flex-col justify-center items-center border-color-three my-[60px] mx-0 py-0 px-[50px] bg-color-six ${classNames(
+        "border",
+        {
+          "border-2": isDropActive,
+        }
+      )}`}
+    >
       <div className="h-[50px] w-full flex flex-row justify-end items-end m-0 p-0">
         <FontAwesomeIcon
           icon={faTimes}
@@ -25,63 +112,69 @@ function JobApplicationForm() {
           alt="location icon"
           className="my-0 mr-[8px] ml-0 p-0"
         />
-        <div className="hidden">
-          {" "}
-          Icons made by{" "}
-          <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
-            {" "}
-            Freepik{" "}
-          </a>{" "}
-          from{" "}
-          <a href="https://www.flaticon.com/" title="Flaticon">
-            www.flaticon.com'
-          </a>
-        </div>
+        {/* Icons made by https://www.flaticon.com/authors/freepik */}
         <span className="text-color-seven">Ikeja Lagos</span>
       </div>
       <form className="min-h-[850px] w-full flex flex-col justify-between items-center">
-        <FormInputOne title="First Name" type="text" name="first-name" />
-        <FormInputOne title="Last Name" type="text" name="last-name" />
-        <FormInputOne title="Email Address" type="email" name="email-address" />
-        <FormInputOne title="Location" type="text" name="location" />
-        <FormInputOne title="Phone Number" type="number" name="phone-number" />
-        <div className="h-[250px] w-full flex flex-col justify-center items-center border border-color-three rounded-lg box-border bg-white my-[40px] mx-0 py-[12px] px-[20px]">
-          <img
-            src={require("../assets/images/cloud-computing.png")}
-            alt="upload cloud icon"
-            className="m-0 p-0"
+        <FormInputOne
+          title="First Name"
+          type="text"
+          name="first-name"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setFirstName(e.target.value)
+          }
+        />
+        <FormInputOne
+          title="Last Name"
+          type="text"
+          name="last-name"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setLastName(e.target.value)
+          }
+        />
+        <FormInputOne
+          title="Email Address"
+          type="email"
+          name="email-address"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setEmail(e.target.value)
+          }
+        />
+        <FormInputOne
+          title="Location"
+          type="text"
+          name="location"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setLocation(e.target.value)
+          }
+        />
+        <FormInputOne
+          title="Phone Number"
+          type="number"
+          name="phone-number"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setPhoneNumber(e.target.value)
+          }
+        />
+        <DropZone
+          onDragStateChange={onDragStateChange}
+          onFilesDrop={onFilesDrop}
+        >
+          <UploadFiles
+            color={color}
+            fileUploaded={fileUploaded}
+            onClick={onButtonClick}
           />
-          <div className="hidden">
-            {" "}
-            Icons made by{" "}
-            <a
-              href="https://www.flaticon.com/authors/itim2101"
-              title="itim2101"
-            >
-              {" "}
-              itim2101{" "}
-            </a>{" "}
-            from{" "}
-            <a href="https://www.flaticon.com/" title="Flaticon">
-              www.flaticon.com'
-            </a>
-          </div>
-          <p className="text-color-three font-semibold my-[2px] mx-0 p-0 text-center">
-            Drag and drop your CV here
-          </p>
-          <p className="text-color-three font-semibold my-[2px] mx-0 p-0">or</p>
-          <button className="my-[5px] mx-0 py-[9px] px-[20px] text-white font-semibold border-0 rounded-lg bg-color-three hover:bg-color-three-9 hover:cursor-pointer">
-            Browse files
-          </button>
-        </div>
+        </DropZone>
         <input
           type="submit"
           value="Submit Application"
           className="h-[50px] w-full border-0 text-white font-normal bg-color-three hover:bg-color-three-9 hover:cursor-pointer mt-0 mb-[40px] mx-0 p-0"
+          onClick={handleSubmit}
         />
       </form>
     </div>
   );
-}
+});
 
 export default JobApplicationForm;

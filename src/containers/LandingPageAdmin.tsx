@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, ChangeEvent } from "react";
+import { useQuery, gql } from "@apollo/client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,6 +17,36 @@ import TableContent from "components/TableContent";
 import Pagination from "components/Pagination";
 
 function LandingPageAdmin({ ...props }) {
+  const jobTypes: string[] = [
+    "Full-time",
+    "Temporary",
+    "Contract",
+    "Permanent",
+    "Internship",
+    "Volunteer",
+  ];
+
+  const { loading, error, data, refetch } = useQuery(
+    gql`
+    query openJobs($type: String!, $page: Int!, $limit: Int!) {
+      jobs(type: String!, page: Int!, limit: Int!) {
+        id
+        title
+        company
+        company_logo
+        updated_at
+      }
+    }
+  `,
+    {
+      variables: {
+        type: jobTypes[0],
+        page: 1,
+        limit: 14,
+      },
+    }
+  );
+
   return (
     <div className="h-[1944px] lg:h-[1822px] w-screen flex flex-col justify-start items-center font-sec bg-color-six">
       <header className="h-[275px] w-full flex flex-col justify-between items-start bg-color-three m-0 py-0 px-[25px] md:px-[50px] lg:px-[75px]">
@@ -40,22 +71,27 @@ function LandingPageAdmin({ ...props }) {
         <div className="h-[150px] w-full flex flex-row justify-center items-end mt-0 mb-[25px] mx-0 p-0">
           <SearchBarAdmin addNewJob={props.addNewJob()} />
         </div>
-        <div className="h-[1100px] w-full flex flex-col justify-between items-center">
-          <TableTitle />
-          <TableContent />
-          <TableContent />
-          <TableContent />
-          <TableContent />
-          <TableContent />
-          <TableContent />
-          <TableContent />
-          <TableContent />
-          <TableContent />
-          <TableContent />
-          <TableContent />
-          <TableContent />
-          <TableContent />
-          <TableContent />
+        <div className="h-[1100px] w-full flex flex-col justify-start items-center">
+          <TableTitle
+            options={jobTypes}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              refetch({ type: e.target.value, page: 1, limit: 14 });
+            }}
+          />
+          {loading ? (
+            <div>Loading...</div>
+          ) : error ? (
+            <div>Error! {error?.message}</div>
+          ) : (
+            data.jobs.map((job: string[], index: number) => (
+              <TableContent
+                key={job.id}
+                jobTitle={job.title}
+                dateMod={job.updated_at}
+              />
+            ))
+          )}
+          {/* <TableContent /> */}
         </div>
         <Pagination />
       </section>
