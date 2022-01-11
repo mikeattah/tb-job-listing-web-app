@@ -8,16 +8,24 @@ function QuickLinksGroup({ ...props }) {
       </p>
       <ul className="text-color-white-6 list-none text-center md:text-left">
         <li className="my-2 mx-0 p-0 text-[14px] lg:text-[16px] hover:text-white hover:cursor-pointer">
-          <a className="">Home</a>
+          <a href="#" className="">
+            Home
+          </a>
         </li>
         <li className="my-2 mx-0 p-0 text-[14px] lg:text-[16px] hover:text-white hover:cursor-pointer">
-          <a className="">About</a>
+          <a href="#" className="">
+            About
+          </a>
         </li>
         <li className="my-2 mx-0 p-0 text-[14px] lg:text-[16px] hover:text-white hover:cursor-pointer">
-          <a className="">Calendar</a>
+          <a href="#" className="">
+            Calendar
+          </a>
         </li>
         <li className="my-2 mx-0 p-0 text-[14px] lg:text-[16px] hover:text-white hover:cursor-pointer">
-          <a className="">Terms and condition</a>
+          <a href="#" className="">
+            Terms and condition
+          </a>
         </li>
       </ul>
     </div>

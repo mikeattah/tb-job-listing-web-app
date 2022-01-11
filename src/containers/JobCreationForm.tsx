@@ -1,5 +1,4 @@
-import React, { MouseEventHandler, ChangeEvent, useState } from "react";
-import { gql, useMutation } from "@apollo/client";
+import React, { ChangeEvent, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -7,28 +6,21 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import FormInputOne from "components/FormInputOne";
 import FormInputTwo from "components/FormInputTwo";
 
+import { post } from "services/http";
+
 function JobCreationForm() {
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [location, setLocation] = useState("");
-  const [jobType, setJobType] = useState("");
+  const [jobCategory, setJobCategory] = useState("");
   const [salaryRange, setSalaryRange] = useState("");
-  const [subDeadline, setSubDeadline] = useState("");
-  const [jobSector, setJobSector] = useState("");
+  const [description, setDescription] = useState("");
+  const [benefits, setBenefits] = useState("");
+  const [jobType, setJobType] = useState("");
+  const [workCondition, setWorkCondition] = useState("");
+  const [deadline, setDeadline] = useState("");
 
-  const ADD_JOB = gql`
-    mutation addJob() {
-      addJob {
-        id
-        title
-        location
-        salary
-        company
-        jobType
-        jobCategory
-        deadline
-      }
-    }`;
+  const url = "https://api.jobboard.tedbree.com/v1/my/jobs";
 
   const jobTypes: string[] = [
     "Full-time",
@@ -39,7 +31,7 @@ function JobCreationForm() {
     "Volunteer",
   ];
 
-  const jobSectors: string[] = [
+  const jobCategories: string[] = [
     "Tech",
     "Health Care",
     "Hospitality",
@@ -47,30 +39,49 @@ function JobCreationForm() {
     "Marketing",
   ];
 
-  const [addJob, { loading, error }] = useMutation(ADD_JOB);
+  const jobConditions: string[] = ["Remote", "Part Remote", "On-Premise"];
 
-  const handleSubmit = (
-    e: MouseEventHandler<HTMLInputElement, MouseEvent>
-  ): void => {
-    e.preventDefault();
-    e.stopPropagation();
+  // Response data type
+  type Res = {
+    status: string;
+    message: string;
+    error?: string;
+  };
 
-    addJob({
-      variables: {
-        id: "",
-        title: jobTitle,
-        location: location,
-        salary: salaryRange,
-        company: companyName,
-        jobType: jobType,
-        jobCategory: jobSector,
-        deadline: subDeadline,
-      },
-    });
+  // Job creation data type
+  type Job = {
+    jobTitle: string;
+    companyName: string;
+    location: string;
+    jobCategory: string;
+    salaryRange: string;
+    description: string;
+    benefits: string;
+    jobType: string;
+    workCondition: string;
+    deadline: string;
+  };
+
+  const createJob: Job = {
+    jobTitle,
+    companyName,
+    location,
+    jobCategory,
+    salaryRange,
+    description,
+    benefits,
+    jobType,
+    workCondition,
+    deadline,
+  };
+
+  const handleSubmit = async () => {
+    const res: Res = await post(url, createJob);
+    alert(res.message || res.error);
   };
 
   return (
-    <div className="h-[950px] w-[550px] flex flex-col justify-center items-center border border-color-three my-[60px] mx-0 py-0 px-[50px] bg-color-six">
+    <div className="min-h-[950px] w-[550px] flex flex-col justify-center items-center border border-color-three my-[60px] mx-0 py-0 px-[50px] bg-color-six">
       <div className="h-[50px] w-full flex flex-row justify-end items-end m-0 p-0">
         <FontAwesomeIcon
           icon={faTimes}
@@ -128,19 +139,43 @@ function JobCreationForm() {
           }
         />
         <FormInputOne
+          title="Description"
+          type="text"
+          name="description"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setDescription(e.target.value)
+          }
+        />
+        <FormInputOne
+          title="Benefits"
+          type="text"
+          name="benefits"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setBenefits(e.target.value)
+          }
+        />
+        <FormInputOne
           title="Submission Deadline"
           type="date"
           name="submission-deadline"
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setSubDeadline(e.target.value)
+            setDeadline(e.target.value)
           }
         />
         <FormInputTwo
           title="What type of Sector is this job categorized under?"
-          name="job-sector"
-          options={jobSectors}
+          name="job-categories"
+          options={jobCategories}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setJobSector(e.target.value)
+            setJobCategory(e.target.value)
+          }
+        />
+        <FormInputTwo
+          title="Work Conditions"
+          name="work-conditions"
+          options={jobConditions}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setWorkCondition(e.target.value)
           }
         />
         <input

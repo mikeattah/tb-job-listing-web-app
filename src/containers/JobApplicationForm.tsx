@@ -1,12 +1,5 @@
-import React, {
-  MouseEventHandler,
-  ChangeEvent,
-  useState,
-  memo,
-  useCallback,
-} from "react";
+import React, { ChangeEvent, useState, memo, useCallback } from "react";
 import classNames from "classnames";
-import { gql, useMutation } from "@apollo/client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -15,13 +8,15 @@ import FormInputOne from "components/FormInputOne";
 import { DropZone } from "components/DropZone";
 import UploadFiles from "components/UploadFiles";
 
-const JobApplicationForm = memo(() => {
+import { post } from "services/http";
+
+const JobApplicationForm = memo((job_id: string) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [location, setLocation] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [resume, setResume] = useState("");
+  const [location, setLocation] = useState("");
+  const [resume, setResume] = useState<File>();
 
   // Active state for dropZone
   const [isDropActive, setIsDropActive] = useState(false);
@@ -31,6 +26,8 @@ const JobApplicationForm = memo(() => {
   // State for uploaded files
   const [fileUploaded, setFileUploaded] = useState("No file uploaded");
   const [color, setColor] = useState("text-red-500");
+
+  const url = `https://api.jobboard.tedbree.com/v1/jobs/${job_id}/apply`;
 
   // Handler for dropZone's "onDragStateChange" event
   const onDragStateChange = useCallback((isDragActive: boolean) => {
@@ -42,6 +39,7 @@ const JobApplicationForm = memo(() => {
     setFiles(files);
     setFileUploaded(`File uploaded: ${files[0].name} ✔️`);
     setColor("text-color-one");
+    setResume(files[0]);
   }, []);
 
   // Handler for UPloadFile's "onButtonClick" event
@@ -49,41 +47,39 @@ const JobApplicationForm = memo(() => {
     setFiles(files);
     setFileUploaded(`File uploaded: ${files[0].name} ✔️`);
     setColor("text-color-one");
+    setResume(files[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const APPLY_FOR_JOB = gql`
-    mutation applyForJob($jobId: String!) {
-      apply(jobId: $jobId) {
-        id
-        first_name
-        last_name
-        email_address
-        phone_number
-        location
-        resume
-      }
-    }
-  `;
+  // Response data type
+  type Res = {
+    status: string;
+    message: string;
+    error?: string;
+  };
 
-  const [applyForJob, { loading, error }] = useMutation(APPLY_FOR_JOB);
+  // Application data type
+  type Apply = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    location: string;
+    cv: File | undefined;
+  };
 
-  const handleSubmit = (
-    e: MouseEventHandler<HTMLInputElement, MouseEvent>
-  ): void => {
-    e.preventDefault();
-    e.stopPropagation();
+  const applyForJob: Apply = {
+    firstName,
+    lastName,
+    email,
+    phone: phoneNumber,
+    location,
+    cv: resume,
+  };
 
-    applyForJob({
-      variables: {
-        id: "",
-        first_name: firstName,
-        last_name: lastName,
-        email_address: email,
-        phone_number: phoneNumber,
-        location: location,
-        resume: resume,
-      },
-    });
+  const handleSubmit = async () => {
+    const res: Res = await post(url, applyForJob);
+    alert(res.message || res.error);
   };
 
   return (

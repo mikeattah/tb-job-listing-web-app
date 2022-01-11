@@ -27,7 +27,11 @@ function TableTitle({ ...props }) {
             className=""
           />
         </label>
-        <select name={props.name} id={props.name} className="">
+        <select
+          name={props.name}
+          id={props.name}
+          className="text-white bg-color-three"
+        >
           {props.options.map((option: string, index: number) => (
             <option key={index} value={option}>
               {option}

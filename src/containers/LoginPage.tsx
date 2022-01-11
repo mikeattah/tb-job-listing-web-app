@@ -1,5 +1,4 @@
-import React, { MouseEventHandler, ChangeEvent, useState } from "react";
-import { useQuery, gql } from "@apollo/client";
+import React, { ChangeEvent, useState } from "react";
 
 import Logo from "components/Logo";
 import FormInputOne from "components/FormInputOne";
@@ -11,28 +10,11 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const LOGIN = gql`
-    query login($email: String!, $password: String!) {
-      login(email: $email, password: $password) {
-        email
-        password
-      }
-    }
-  `;
+  const register = "https://api.jobboard.tedbree.com/v1/register";
+  const login = "https://api.jobboard.tedbree.com/v1/login";
+  const logout = "https://api.jobboard.tedbree.com/v1/logout";
 
-  const { loading, error, data } = useQuery(LOGIN, {
-    variables: {
-      email: email,
-      password: password,
-    },
-  });
-
-  const handleLogin = (
-    e: MouseEventHandler<HTMLInputElement, MouseEvent>
-  ): void => {
-    e.preventDefault();
-    e.stopPropagation();
-
+  const handleLogin = () => {
     if (email === "") {
       alert("Please enter your email");
     } else if (password === "") {

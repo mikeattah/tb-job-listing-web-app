@@ -131,6 +131,7 @@ export const DropZone = memo((props: PropsWithChildren<DropZoneProps>) => {
   // observe active state and emit changes
   useEffect(() => {
     onDragStateChange?.(isDragActive);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDragActive]);
 
   // attach listeners to dropZone on mount
@@ -151,6 +152,7 @@ export const DropZone = memo((props: PropsWithChildren<DropZoneProps>) => {
       tempZoneRef?.removeEventListener("dragleave", handleDragOut);
       tempZoneRef?.removeEventListener("drop", handleDrop);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // ...
 

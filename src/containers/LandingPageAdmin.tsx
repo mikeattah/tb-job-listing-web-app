@@ -1,5 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
-import { useQuery, gql } from "@apollo/client";
+import React, { ChangeEvent } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,7 +15,43 @@ import TableTitle from "components/TableTitle";
 import TableContent from "components/TableContent";
 import Pagination from "components/Pagination";
 
+import { get, post, del, patch } from "services/http";
+
 function LandingPageAdmin({ ...props }) {
+  // Response data type
+  type Res = {
+    status: string;
+    message: string;
+    error?: string;
+  };
+
+  // Jobs data type
+  type Jobs = {
+    id: string;
+    title: string;
+    company: string;
+    company_logo: null;
+    location: string;
+    category: string;
+    salary: string;
+    description: string;
+    benefits: string;
+    type: string;
+    work_condition: string;
+    created_at: string;
+    updated_at: string;
+  };
+
+  // User data type
+  type User = {
+    id: number;
+    name: string;
+    avatar: string;
+    email: string;
+    created_at: string;
+    updated_at: string;
+  };
+
   const jobTypes: string[] = [
     "Full-time",
     "Temporary",
@@ -26,26 +61,40 @@ function LandingPageAdmin({ ...props }) {
     "Volunteer",
   ];
 
-  const { loading, error, data, refetch } = useQuery(
-    gql`
-    query openJobs($type: String!, $page: Int!, $limit: Int!) {
-      jobs(type: String!, page: Int!, limit: Int!) {
-        id
-        title
-        company
-        company_logo
-        updated_at
-      }
+  const jobsLink = "https://api.jobboard.tedbree.com/v1/my/jobs";
+  const userLink = "https://api.jobboard.tedbree.com/v1/my/users";
+
+  const data = get<Jobs[]>(jobsLink);
+  const user = get<User>(userLink);
+
+  const editJob = async (id: string) => {
+    const url = `${jobsLink}/${id}`;
+    const res = await patch<Res>(url, {
+      title: "",
+      company: "",
+      location: "",
+      category: "",
+      salary: "",
+      description: "",
+      benefits: "",
+      type: "",
+      work_condition: "",
+    });
+    if (res.status === "success") {
+      alert(res.message);
+    } else {
+      alert(res.error);
     }
-  `,
-    {
-      variables: {
-        type: jobTypes[0],
-        page: 1,
-        limit: 14,
-      },
+  };
+
+  const deleteJob = async (id: string) => {
+    const res: Res = await del(`${jobsLink}/${id}`);
+    if (res.status === "success") {
+      alert(res.message);
+    } else {
+      alert(res.error);
     }
-  );
+  };
 
   return (
     <div className="h-[1944px] lg:h-[1822px] w-screen flex flex-col justify-start items-center font-sec bg-color-six">
@@ -59,6 +108,7 @@ function LandingPageAdmin({ ...props }) {
           <img
             src={require("../assets/images/tedbree.png")}
             alt="Tedbree Logo"
+            title="Tedbree Logo"
             className="hover:cursor-pointer"
           />
         </div>
@@ -73,23 +123,18 @@ function LandingPageAdmin({ ...props }) {
         </div>
         <div className="h-[1100px] w-full flex flex-col justify-start items-center">
           <TableTitle
+            name="filter-jobs"
             options={jobTypes}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              refetch({ type: e.target.value, page: 1, limit: 14 });
-            }}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {}}
           />
-          {loading ? (
-            <div>Loading...</div>
-          ) : error ? (
-            <div>Error! {error?.message}</div>
-          ) : (
-            data.jobs.map((job: string[], index: number) => (
-              <TableContent
-                key={job.id}
-                jobTitle={job.title}
-                dateMod={job.updated_at}
-              />
-            ))
+          {data.map(
+            (job: string[], index: number) => index < 14 && <TableContent />
+            //   key={job.id}
+            //   jobTitle={job.title}
+            //   dateMod={job.updated_at}
+            //   editJob={editJob(job.id)}
+            //   deleteJob={deleteJob(job.id)}
+            // />
           )}
           {/* <TableContent /> */}
         </div>

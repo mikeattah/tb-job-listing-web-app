@@ -1,21 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-const client = new ApolloClient({
-  uri: "https://api.jobboard.tedbree.com/v1/my/jobs/1",
-  cache: new InMemoryCache(),
-});
-
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

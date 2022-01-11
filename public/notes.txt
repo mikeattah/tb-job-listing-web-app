@@ -1,0 +1,7 @@
+A Business/User should be able to register, login and logout
+A Business/User can see a list of jobs they created
+A Business/User should have the ability to create, update and delete a job
+A Business/User should be able to see a list of job applications
+A Guest Should be able to browse through a List of Jobs
+A Guest should be able to view and apply for a Job
+A Guest can search for a Job
