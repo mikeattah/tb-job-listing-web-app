@@ -18,6 +18,8 @@ import NavBar from "components/NavBar";
 
 import { get } from "services/http";
 
+import fakeData from "assets/fake-data.json";
+
 function LandingPageGuest() {
   const [pageIndex, setPageIndex] = useState(0);
 
@@ -25,12 +27,12 @@ function LandingPageGuest() {
     id: string;
     title: string;
     company: string;
-    company_logo: null;
+    company_logo: string | null;
     location: string;
     category: string;
     salary: string;
     description: string;
-    benefits: string;
+    benefits: string | null;
     type: string;
     work_condition: string;
     created_at: string;
@@ -58,20 +60,25 @@ function LandingPageGuest() {
 
   const url = "https://api.jobboard.tedbree.com/v1/jobs";
 
-  const data = get<Jobs[]>(url);
+  var data: Jobs[] = fakeData;
 
   // pageElements: 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, ...
   let pageElements: number = 4;
   let pageCount: number = 5;
   let pageArray: number[] = [];
 
-  if (data) pageCount = Math.ceil(data.length / pageElements);
+  async function getData() {
+    data = await get<Jobs[]>(url);
+  }
+  getData();
+
+  pageCount = Math.ceil(data.length / pageElements);
 
   for (let i = 0; i < pageCount; i++) {
     pageArray = [...pageArray, i];
   }
 
-  if (data) console.log(data, data.length, pageArray.length);
+  console.log(data, data.length, pageArray.length);
 
   return (
     <div className="h-[2500px] md:h-[2695px] lg:h-[2266px] w-screen flex flex-col justify-start items-center font-sec  bg-color-six">
@@ -88,7 +95,9 @@ function LandingPageGuest() {
       <SearchBarGuest />
       <section className="h-[1500px] md:h-[2085px] lg:h-[1657px] w-full flex flex-col justify-center items-start m-0 py-0 px-[25px] md:px-[50px] lg:px-[75px]">
         <div className="h-[100px] md:h-[150px] w-full md:w-[40%] lg:w-[48%] text-color-seven flex flex-col lg:flex-row justify-center lg:justify-between items-start lg:items-center font-semibold text-[16px]">
-          <span className="">Showing {68} results</span>
+          <span className="">
+            Showing {data.length} {`result ${data.length > 1 ? "s" : ""}`}
+          </span>
           <div className="">
             <label htmlFor="search-results" className="text-color-ten">
               Sort by:
@@ -109,19 +118,17 @@ function LandingPageGuest() {
         </div>
         <div className="h-[1200px] md:h-[1785px] lg:h-[1357px] w-full flex flex-col md:flex-row justify-between items-center">
           <div className="h-[325px] md:h-full w-full md:w-[40%] lg:w-[48%] flex flex-col justify-between items-center overflow-y-auto md:overflow-hidden border-none">
-            {data &&
-              [...data.slice(pageIndex, pageIndex + pageElements)].map(
-                (job: string[], index: number) => (
-                  <JobSummary />
-                  //   key={job.id}
-                  //   jobTitle={job.title}
-                  //   salary={job.salary}
-                  //   location={job.location}
-                  //   description={job.description}
-                  // />
-                )
-              )}
-            {/* <JobSummary /> */}
+            {[...data.slice(pageIndex, pageIndex + pageElements)].map(
+              (job: Jobs, index: number) => (
+                <JobSummary
+                  key={job.id}
+                  jobTitle={job.title}
+                  salary={job.salary}
+                  location={job.location}
+                  description={job.description}
+                />
+              )
+            )}
           </div>
           <div className="h-[850px] md:h-full w-full md:w-[56%] lg:w-[48%]">
             <JobDescription />

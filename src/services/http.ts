@@ -1,7 +1,4 @@
-export async function http<T>(
-  url: string,
-  config: RequestInit = {}
-): Promise<T> {
+async function http<T>(url: RequestInfo, config: RequestInit): Promise<T> {
   return await fetch(url, config).then((res) => {
     if (!res.ok) {
       throw new Error(res.statusText);
@@ -11,7 +8,7 @@ export async function http<T>(
 }
 
 export async function get<T>(
-  url: string,
+  url: RequestInfo,
   config: RequestInit = {
     method: "GET",
   }
@@ -20,13 +17,13 @@ export async function get<T>(
 }
 
 export async function post<T>(
-  url: string,
+  url: RequestInfo,
   data: any,
   config: RequestInit = {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json; charset=UTF-8",
     },
   }
 ): Promise<T> {
@@ -34,13 +31,13 @@ export async function post<T>(
 }
 
 export async function put<T>(
-  url: string,
+  url: RequestInfo,
   data: any,
   config: RequestInit = {
     method: "PUT",
     body: JSON.stringify(data),
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json; charset=UTF-8",
     },
   }
 ): Promise<T> {
@@ -48,7 +45,7 @@ export async function put<T>(
 }
 
 export async function del<T>(
-  url: string,
+  url: RequestInfo,
   config: RequestInit = {
     method: "DELETE",
   }
@@ -57,13 +54,13 @@ export async function del<T>(
 }
 
 export async function patch<T>(
-  url: string,
+  url: RequestInfo,
   data: any,
   config: RequestInit = {
     method: "PATCH",
     body: JSON.stringify(data),
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json; charset=UTF-8",
     },
   }
 ): Promise<T> {

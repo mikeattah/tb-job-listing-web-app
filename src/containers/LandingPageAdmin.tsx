@@ -35,7 +35,7 @@ function LandingPageAdmin({ ...props }) {
     category: string;
     salary: string;
     description: string;
-    benefits: string;
+    benefits: string | null;
     type: string;
     work_condition: string;
     created_at: string;
@@ -64,8 +64,42 @@ function LandingPageAdmin({ ...props }) {
   const jobsLink = "https://api.jobboard.tedbree.com/v1/my/jobs";
   const userLink = "https://api.jobboard.tedbree.com/v1/my/users";
 
-  const data = get<Jobs[]>(jobsLink);
-  const user = get<User>(userLink);
+  var jobs: Jobs[] = [
+    {
+      id: "",
+      title: "",
+      company: "",
+      company_logo: null,
+      location: "",
+      category: "",
+      salary: "",
+      description: "",
+      benefits: null,
+      type: "",
+      work_condition: "",
+      created_at: "",
+      updated_at: "",
+    },
+  ];
+
+  var users: User = {
+    id: 0,
+    name: "",
+    avatar: "",
+    email: "",
+    created_at: "",
+    updated_at: "",
+  };
+
+  async function getJobs() {
+    jobs = await get<Jobs[]>(jobsLink);
+  }
+  getJobs();
+
+  async function getUsers() {
+    users = await get<User>(userLink);
+  }
+  getUsers();
 
   const editJob = async (id: string) => {
     const url = `${jobsLink}/${id}`;
@@ -127,16 +161,18 @@ function LandingPageAdmin({ ...props }) {
             options={jobTypes}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {}}
           />
-          {data.map(
-            (job: string[], index: number) => index < 14 && <TableContent />
-            //   key={job.id}
-            //   jobTitle={job.title}
-            //   dateMod={job.updated_at}
-            //   editJob={editJob(job.id)}
-            //   deleteJob={deleteJob(job.id)}
-            // />
+          {jobs.map(
+            (job: Jobs, index: number) =>
+              index < 14 && (
+                <TableContent
+                  key={job.id}
+                  jobTitle={job.title}
+                  dateMod={job.updated_at}
+                  editJob={editJob(job.id)}
+                  deleteJob={deleteJob(job.id)}
+                />
+              )
           )}
-          {/* <TableContent /> */}
         </div>
         <Pagination />
       </section>
