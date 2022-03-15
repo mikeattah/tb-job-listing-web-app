@@ -64,7 +64,7 @@ function LandingPageAdmin({ ...props }) {
   const jobsLink = "https://api.jobboard.tedbree.com/v1/my/jobs";
   const userLink = "https://api.jobboard.tedbree.com/v1/my/users";
 
-  var jobs: Jobs[] = [
+  let jobs: Jobs[] = [
     {
       id: "",
       title: "",
@@ -82,7 +82,7 @@ function LandingPageAdmin({ ...props }) {
     },
   ];
 
-  var users: User = {
+  let users: User = {
     id: 0,
     name: "",
     avatar: "",

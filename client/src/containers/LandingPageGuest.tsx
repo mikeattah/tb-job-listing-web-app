@@ -60,23 +60,24 @@ function LandingPageGuest() {
 
   const url = "https://api.jobboard.tedbree.com/v1/jobs";
 
-  var data: Jobs[] = fakeData;
+  let data: Jobs[] = fakeData;
 
-  // pageElements: 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, ...
   let pageElements: number = 4;
   let pageCount: number = 5;
   let pageArray: number[] = [];
 
-  async function getData() {
+  // IIFE to get data from API
+  (async function getData() {
     data = await get<Jobs[]>(url);
-  }
-  getData();
+  })();
 
   pageCount = Math.ceil(data.length / pageElements);
 
   for (let i = 0; i < pageCount; i++) {
     pageArray = [...pageArray, i];
   }
+
+  const handleSeeMoreClick = (e: React.MouseEvent<HTMLButtonElement>) => {};
 
   console.log(data, data.length, pageArray.length);
 
@@ -96,7 +97,7 @@ function LandingPageGuest() {
       <section className="h-[1500px] md:h-[2085px] lg:h-[1657px] w-full flex flex-col justify-center items-start m-0 py-0 px-[25px] md:px-[50px] lg:px-[75px]">
         <div className="h-[100px] md:h-[150px] w-full md:w-[40%] lg:w-[48%] text-color-seven flex flex-col lg:flex-row justify-center lg:justify-between items-start lg:items-center font-semibold text-[16px]">
           <span className="">
-            Showing {data.length} {`result ${data.length > 1 ? "s" : ""}`}
+            Showing {data.length} {`result${data.length > 1 ? "s" : ""}`}
           </span>
           <div className="">
             <label htmlFor="search-results" className="text-color-ten">
@@ -126,12 +127,18 @@ function LandingPageGuest() {
                   salary={job.salary}
                   location={job.location}
                   description={job.description}
+                  onSeeMoreClick={handleSeeMoreClick}
                 />
               )
             )}
           </div>
           <div className="h-[850px] md:h-full w-full md:w-[56%] lg:w-[48%]">
-            <JobDescription />
+            <JobDescription
+              jobTitle={data[pageIndex].title}
+              location={data[pageIndex].location}
+              description={data[pageIndex].description}
+              benefits={data[pageIndex].benefits}
+            />
           </div>
         </div>
         <Pagination
@@ -143,7 +150,7 @@ function LandingPageGuest() {
           onRightArrowClick={() => setPageIndex(pageIndex + pageElements)}
         />
       </section>
-      <footer className="h-[500px] md:h-[266px] w-full flex flex-col md:flex-row justify-center items-center bg-color-three m-0 pt-[25px] md:pt-[50px] pb-0 px-[25px] md:px-[50px] px-[75px]">
+      <footer className="h-[500px] md:h-[266px] w-full flex flex-col md:flex-row justify-center items-center bg-color-three m-0 pt-[25px] md:pt-[50px] pb-0 px-[25px] md:px-[50px] lg:px-[75px]">
         <div className="h-1/4 md:h-full w-full md:w-1/4 flex flex-col justify-center md:justify-start items-center md:items-start">
           <Logo position="static" show="hidden" />
           <p className="text-white mt-[10px] mb-0 mx-0 p-0">

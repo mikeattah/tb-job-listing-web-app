@@ -5,3 +5,10 @@ A Business/User should be able to see a list of job applications
 A Guest Should be able to browse through a List of Jobs
 A Guest should be able to view and apply for a Job
 A Guest can search for a Job
+
+Convert project to a full stack app
+Create database with MongoDB
+Create a user authentication system
+Create a user profile system
+Create a job application system
+Create collections for users, jobs, and applications

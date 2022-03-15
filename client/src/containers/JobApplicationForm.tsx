@@ -10,7 +10,7 @@ import UploadFiles from "components/UploadFiles";
 
 import { post } from "services/http";
 
-const JobApplicationForm = memo((job_id: string) => {
+const JobApplicationForm = memo(({ ...props }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,7 +27,7 @@ const JobApplicationForm = memo((job_id: string) => {
   const [fileUploaded, setFileUploaded] = useState("No file uploaded");
   const [color, setColor] = useState("text-red-500");
 
-  const url = `https://api.jobboard.tedbree.com/v1/jobs/${job_id}/apply`;
+  const url = `https://api.jobboard.tedbree.com/v1/jobs/${props.job_id}/apply`;
 
   // Handler for dropZone's "onDragStateChange" event
   const onDragStateChange = useCallback((isDragActive: boolean) => {

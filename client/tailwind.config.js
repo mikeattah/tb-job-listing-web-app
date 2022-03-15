@@ -154,5 +154,5 @@ module.exports = {
       fill: ["hover", "focus"],
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };
