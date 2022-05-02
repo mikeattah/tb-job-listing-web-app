@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,21 +7,22 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 
-import Logo from "components/Logo";
-import SearchBarGuest from "components/SearchBarGuest";
-import JobSummary from "components/JobSummary";
-import JobDescription from "components/JobDescription";
-import Circles from "components/Circles";
-import QuickLinksGroup from "components/QuickLinksGroup";
-import Pagination from "components/Pagination";
-import NavBar from "components/NavBar";
+import Logo from "../components/Logo";
+import SearchBarGuest from "../components/SearchBarGuest";
+import JobSummary from "../components/JobSummary";
+import JobDescription from "../components/JobDescription";
+import Circles from "../components/Circles";
+import QuickLinksGroup from "../components/QuickLinksGroup";
+import Pagination from "../components/Pagination";
+import NavBar from "../components/NavBar";
 
-import { get } from "services/http";
+import { get } from "../services/http";
 
-import fakeData from "assets/fake-data.json";
+import fakeData from "../assets/fake-data.json";
 
 function LandingPageGuest() {
   const [pageIndex, setPageIndex] = useState(0);
+  const [data, setData] = useState(null);
 
   type Jobs = {
     id: string;
@@ -58,18 +59,22 @@ function LandingPageGuest() {
   ];
   const jobConditions: string[] = ["Remote", "Part Remote", "On-Premise"];
 
-  const url = "https://api.jobboard.tedbree.com/v1/jobs";
-
-  let data: Jobs[] = fakeData;
-
   let pageElements: number = 4;
   let pageCount: number = 5;
   let pageArray: number[] = [];
 
+  useEffect(() => {
+    fetch("/jobs")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data.message);
+      });
+  }, []);
+
   // IIFE to get data from API
-  (async function getData() {
-    data = await get<Jobs[]>(url);
-  })();
+  // (async function getData() {
+  //   data = await get<Jobs[]>(url);
+  // })();
 
   pageCount = Math.ceil(data.length / pageElements);
 
