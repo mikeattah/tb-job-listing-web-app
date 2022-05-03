@@ -1,9 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
-
-import Logo from "components/Logo";
-import FormInputOne from "components/FormInputOne";
-import Circles from "components/Circles";
-
+import Logo from "../components/Logo";
+import FormInputOne from "../components/FormInputOne";
+import Circles from "../components/Circles";
 // import LoginPageDesign from "./login-irregular-shape.svg";
 
 function LoginPage() {
@@ -14,18 +12,21 @@ function LoginPage() {
   const login = "https://api.jobboard.tedbree.com/v1/login";
   const logout = "https://api.jobboard.tedbree.com/v1/logout";
 
+  const data = [{ user: "", email: "", password: "" }];
+
   const handleLogin = () => {
     if (email === "") {
       alert("Please enter your email");
     } else if (password === "") {
       alert("Please enter your password");
     } else {
-      data.login.map((user: any, index: number) => {
+      data.map((item: any, index: number) => {
+        const { user, email, password } = item;
         if (user.email === email) {
           console.log("login success");
         }
 
-        if (index === data.login.length - 1) {
+        if (index === data.length - 1) {
           alert("login failed");
         }
       });

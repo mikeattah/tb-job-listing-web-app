@@ -1,6 +1,7 @@
 import React from "react";
 
 function SearchBarAdmin({ ...props }) {
+  const { addNewJob } = props;
   return (
     <div className="h-[125px] w-full m-0 p-0 flex flex-col md:flex-row justify-evenly md:justify-center items-center">
       <div className="h-2/5 w-full md:w-3/5 lg:w-2/5 flex flex-row justify-between items-center bg-white rounded-lg shadow-aaa m-0 py-0 px-2">
@@ -24,11 +25,12 @@ function SearchBarAdmin({ ...props }) {
       </div>
       <div className="h-1/2 md:h-full w-full md:w-2/5 lg:w-3/5 flex flex-row justify-end items-center m-0 p-0">
         <button
+          type="button"
           id="new-job"
           className="m-0 py-[3px] md:py-[8px] px-[20px] text-[16px] text-white hover:text-color-nine
           border-2 border-color-nine rounded-lg font-normal hover:cursor-pointer
           bg-color-nine hover:bg-white shadow-bbb"
-          onClick={() => props.addNewJob()}
+          onClick={() => addNewJob()}
         >
           + New Job
         </button>

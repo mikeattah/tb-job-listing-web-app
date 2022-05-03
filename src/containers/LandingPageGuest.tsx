@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInstagram,
   faFacebookF,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-
+import { Jobs } from "./types";
 import Logo from "../components/Logo";
 import SearchBarGuest from "../components/SearchBarGuest";
 import JobSummary from "../components/JobSummary";
@@ -15,30 +14,12 @@ import Circles from "../components/Circles";
 import QuickLinksGroup from "../components/QuickLinksGroup";
 import Pagination from "../components/Pagination";
 import NavBar from "../components/NavBar";
-
 import { get } from "../services/http";
-
 import fakeData from "../assets/fake-data.json";
 
 function LandingPageGuest() {
   const [pageIndex, setPageIndex] = useState(0);
   const [data, setData] = useState(null);
-
-  type Jobs = {
-    id: string;
-    title: string;
-    company: string;
-    company_logo: string | null;
-    location: string;
-    category: string;
-    salary: string;
-    description: string;
-    benefits: string | null;
-    type: string;
-    work_condition: string;
-    created_at: string;
-    updated_at: string;
-  };
 
   // (e) => fetcher(url/{`?q=${e.target.value}`})
   const sortJobs: string[] = ["Latest", "Oldest"];

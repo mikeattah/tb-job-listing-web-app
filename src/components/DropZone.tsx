@@ -3,6 +3,7 @@
 import React, {
   memo,
   PropsWithChildren,
+  ReactNode,
   useState,
   useRef,
   useCallback,
@@ -10,7 +11,7 @@ import React, {
 } from "react";
 
 // Define interface for component props/api
-export interface DropZoneProps {
+interface DropZoneProps {
   onDragStateChange?: (isDragActive: boolean) => void;
   onDrag?: () => void;
   onDragIn?: () => void;
@@ -27,6 +28,7 @@ export const DropZone = memo((props: PropsWithChildren<DropZoneProps>) => {
     onDragOut,
     onDrop,
     onFilesDrop,
+    children,
   } = props;
 
   // State to keep track when dropzone is active/inactive
@@ -157,7 +159,7 @@ export const DropZone = memo((props: PropsWithChildren<DropZoneProps>) => {
   // ...
 
   // Render div with ref and children
-  return <div ref={dropZoneRef}>{props.children}</div>;
+  return <div ref={dropZoneRef}>{children}</div>;
 });
 
 DropZone.displayName = "DropZone";

@@ -1,57 +1,21 @@
 import React, { ChangeEvent } from "react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInstagram,
   faFacebookF,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { Jobs, Res, User } from "./types";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
-
-import Logo from "components/Logo";
-import Circles from "components/Circles";
-import SearchBarAdmin from "components/SearchBarAdmin";
-import TableTitle from "components/TableTitle";
-import TableContent from "components/TableContent";
-import Pagination from "components/Pagination";
-
-import { get, post, del, patch } from "services/http";
+import Logo from "../components/Logo";
+import Circles from "../components/Circles";
+import SearchBarAdmin from "../components/SearchBarAdmin";
+import TableTitle from "../components/TableTitle";
+import TableContent from "../components/TableContent";
+import Pagination from "../components/Pagination";
+import { get, post, del, patch } from "../services/http";
 
 function LandingPageAdmin({ ...props }) {
-  // Response data type
-  type Res = {
-    status: string;
-    message: string;
-    error?: string;
-  };
-
-  // Jobs data type
-  type Jobs = {
-    id: string;
-    title: string;
-    company: string;
-    company_logo: null;
-    location: string;
-    category: string;
-    salary: string;
-    description: string;
-    benefits: string | null;
-    type: string;
-    work_condition: string;
-    created_at: string;
-    updated_at: string;
-  };
-
-  // User data type
-  type User = {
-    id: number;
-    name: string;
-    avatar: string;
-    email: string;
-    created_at: string;
-    updated_at: string;
-  };
-
   const jobTypes: string[] = [
     "Full-time",
     "Temporary",

@@ -1,14 +1,12 @@
 import React, { ChangeEvent, useState, memo, useCallback } from "react";
 import classNames from "classnames";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-
-import FormInputOne from "components/FormInputOne";
-import { DropZone } from "components/DropZone";
-import UploadFiles from "components/UploadFiles";
-
-import { post } from "services/http";
+import { Apply, Res } from "./types";
+import FormInputOne from "../components/FormInputOne";
+import { DropZone } from "../components/DropZone";
+import UploadFiles from "../components/UploadFiles";
+import { post } from "../services/http";
 
 const JobApplicationForm = memo(({ ...props }) => {
   const [firstName, setFirstName] = useState("");
@@ -50,23 +48,6 @@ const JobApplicationForm = memo(({ ...props }) => {
     setResume(files[0]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // Response data type
-  type Res = {
-    status: string;
-    message: string;
-    error?: string;
-  };
-
-  // Application data type
-  type Apply = {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    location: string;
-    cv: File | undefined;
-  };
 
   const applyForJob: Apply = {
     firstName,
@@ -166,7 +147,7 @@ const JobApplicationForm = memo(({ ...props }) => {
           type="submit"
           value="Submit Application"
           className="h-[50px] w-full border-0 text-white font-normal bg-color-three hover:bg-color-three-9 hover:cursor-pointer mt-0 mb-[40px] mx-0 p-0"
-          onClick={handleSubmit}
+          onClick={() => handleSubmit()}
         />
       </form>
     </div>

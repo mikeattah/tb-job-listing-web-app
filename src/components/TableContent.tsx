@@ -10,10 +10,16 @@ function TableContent({ ...props }) {
         <span className="w-[20%] text-right m-0 p-0">100</span>
       </div>
       <div className="h-full w-2/5 md:w-[45%] lg:w-1/2 flex flex-col md:flex-row justify-evenly md:justify-end lg:justify-between items-end md:items-center m-0 py-0 px-[15px] md:px-[40px] lg:px-[75px]">
-        <button className="my-0 mr-0 md:mr-8 lg:mr-12 ml-0 lg:m-0 py-[2px] px-[18px] md:px-[25px] lg:px-[37px] text-[12px] md:text-[16px] text-color-ten group-hover:text-white border-2 border-white group-hover:border-color-nine rounded-md font-normal hover:cursor-pointer bg-white group-hover:bg-color-nine">
+        <button
+          type="button"
+          className="my-0 mr-0 md:mr-8 lg:mr-12 ml-0 lg:m-0 py-[2px] px-[18px] md:px-[25px] lg:px-[37px] text-[12px] md:text-[16px] text-color-ten group-hover:text-white border-2 border-white group-hover:border-color-nine rounded-md font-normal hover:cursor-pointer bg-white group-hover:bg-color-nine"
+        >
           Edit
         </button>
-        <button className="m-0 py-[2px] px-[9px] md:px-[18px] lg:px-[33px] text-[12px] md:text-[16px] group-hover:text-color-one border-2 border-white group-hover:border-color-one font-normal hover:cursor-pointer bg-white">
+        <button
+          type="button"
+          className="m-0 py-[2px] px-[9px] md:px-[18px] lg:px-[33px] text-[12px] md:text-[16px] group-hover:text-color-one border-2 border-white group-hover:border-color-one font-normal hover:cursor-pointer bg-white"
+        >
           Delete
         </button>
       </div>

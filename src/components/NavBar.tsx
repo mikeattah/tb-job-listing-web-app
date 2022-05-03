@@ -23,7 +23,10 @@ function NavBar({ ...props }) {
           </a>
         </li>
       </ul>
-      <button className="absolute top-[165px] left-0 md:static hidden group-hover:block md:block my-0 ml-3 md:ml-4 ml-5 mr-0 py-1 px-4 md:px-2 text-color-three hover:text-color-eight font-bold rounded-lg bg-color-eight hover:bg-color-three border-2 hover:border-color-eight">
+      <button
+        type="button"
+        className="absolute top-[165px] left-0 md:static hidden group-hover:block md:block my-0 lg:ml-3 md:ml-4 ml-5 mr-0 py-1 px-4 md:px-2 text-color-three hover:text-color-eight font-bold rounded-lg bg-color-eight hover:bg-color-three border-2 hover:border-color-eight"
+      >
         Post Job
       </button>
     </div>

@@ -1,22 +1,34 @@
 import React from "react";
+import { nanoid } from "nanoid";
 
 function Pagination({ ...props }) {
+  const {
+    pageIndex,
+    pageElements,
+    pageArray,
+    onLeftArrowClick,
+    onRightArrowClick,
+    onNumberClick,
+  } = props;
   return (
     <div className="h-[150px] w-full md:w-[45%] flex flex-row justify-center md:justify-start items-start m-0 pt-[40px] pb-0 px-0">
       <button
-        onClick={() => props.onLeftArrowClick?.()}
+        type="button"
+        onClick={() => onLeftArrowClick?.()}
         className="text-color-three hover:text-white hover:bg-color-three font-semibold border-[0.2px] border-color-three rounded-md my-0 mr-[6px] md:mr-[8px] lg:mr-[10px] ml-0 py-[3px] md:py-[4px] lg:py-[5px] px-[9px] md:px-[12px] lg:px-[15px] hover:cursor-pointer"
-        disabled={props.pageIndex === props.pageArray[0] ? true : false}
+        disabled={pageIndex === pageArray[0] ? true : false}
       >
         &#60;
       </button>
-      {props.pageArray.map((page: number, index: number) => {
+      {pageArray.map((page: number, index: number) => {
         return (
           <button
+            type="button"
+            key={nanoid()}
             value={page}
-            onClick={(value) => props.onNumberClick?.(value)}
+            onClick={(value) => onNumberClick?.(value)}
             className={`font-semibold border-[0.2px] border-color-three rounded-md my-0 mr-[6px] md:mr-[8px] lg:mr-[10px] ml-0 py-[3px] md:py-[4px] lg:py-[5px] px-[9px] md:px-[12px] lg:px-[15px] hover:cursor-pointer ${
-              props.pageIndex === props.pageElements * index
+              pageIndex === pageElements * index
                 ? "text-white bg-color-three hover:text-color-three hover:bg-white"
                 : "text-color-three bg-white hover:text-white hover:bg-color-three"
             }`}
@@ -26,11 +38,11 @@ function Pagination({ ...props }) {
         );
       })}
       <button
-        onClick={() => props.onRightArrowClick?.()}
+        type="button"
+        onClick={() => onRightArrowClick?.()}
         className="text-color-three hover:text-white hover:bg-color-three font-semibold border-[0.2px] border-color-three rounded-md my-0 mr-[6px] md:mr-[8px] lg:mr-[10px] ml-0 py-[3px] md:py-[4px] lg:py-[5px] px-[9px] md:px-[12px] lg:px-[15px] hover:cursor-pointer"
         disabled={
-          props.pageIndex ===
-          props.pageArray[props.pageArray.length - 1] * props.pageElements
+          pageIndex === pageArray[pageArray.length - 1] * pageElements
             ? true
             : false
         }

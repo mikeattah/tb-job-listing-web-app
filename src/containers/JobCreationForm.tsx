@@ -1,12 +1,10 @@
 import React, { ChangeEvent, useState } from "react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-
-import FormInputOne from "components/FormInputOne";
-import FormInputTwo from "components/FormInputTwo";
-
-import { post } from "services/http";
+import { Job, Res } from "./types";
+import FormInputOne from "../components/FormInputOne";
+import FormInputTwo from "../components/FormInputTwo";
+import { post } from "../services/http";
 
 function JobCreationForm() {
   const [jobTitle, setJobTitle] = useState("");
@@ -40,27 +38,6 @@ function JobCreationForm() {
   ];
 
   const jobConditions: string[] = ["Remote", "Part Remote", "On-Premise"];
-
-  // Response data type
-  type Res = {
-    status: string;
-    message: string;
-    error?: string;
-  };
-
-  // Job creation data type
-  type Job = {
-    jobTitle: string;
-    companyName: string;
-    location: string;
-    jobCategory: string;
-    salaryRange: string;
-    description: string;
-    benefits: string;
-    jobType: string;
-    workCondition: string;
-    deadline: string;
-  };
 
   const createJob: Job = {
     jobTitle,
